@@ -13,14 +13,14 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import java.io.IOException;
 
 public class MergeTextFiles {
-	public static class Map extends Mapper<LongWritable, Text, Text, Text> {
+	public static class mMapper extends Mapper<LongWritable, Text, Text, Text> {
 		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 			String line = value.toString();
 			context.write(new Text(line), new Text(""));
 		}
 	}
 
-	public static class Reduce extends Reducer<Text, Text, Text, Text> {
+	public static class mReducer extends Reducer<Text, Text, Text, Text> {
 		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 			context.write(key, new Text(""));
 		}
@@ -33,9 +33,9 @@ public class MergeTextFiles {
 		job.setJobName("MergeTextFiles");
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
-		job.setMapperClass(Map.class);
-		job.setCombinerClass(Reduce.class);
-		job.setReducerClass(Reduce.class);
+		job.setMapperClass(mMapper.class);
+		job.setCombinerClass(mReducer.class);
+		job.setReducerClass(mReducer.class);
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 		FileInputFormat.setInputPaths(job, new Path("/Users/yizhao/Desktop/input"));
