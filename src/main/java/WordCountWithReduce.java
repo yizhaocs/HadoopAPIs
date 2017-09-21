@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 
-public class WordCount {
+public class WordCountWithReduce {
 
 	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 		private final static IntWritable one = new IntWritable(1);
@@ -55,12 +55,13 @@ public class WordCount {
 
 		job.setMapperClass(Map.class);
 		job.setReducerClass(Reduce.class);
+		// job.setNumReduceTasks(0);
 
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
-		FileInputFormat.addInputPath(job, new Path("/Users/yizhao/Desktop/input"));
-		FileOutputFormat.setOutputPath(job, new Path("/Users/yizhao/Desktop/output2"));
+		FileInputFormat.addInputPath(job, new Path("/Users/yzhao/Desktop/input"));
+		FileOutputFormat.setOutputPath(job, new Path("/Users/yzhao/Desktop/output4"));
 
 		job.waitForCompletion(true);
 	}

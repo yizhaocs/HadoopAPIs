@@ -1,1 +1,13 @@
-target
+/bin/
+.idea/*
+.settings/*
+.DS_Store
+target/*
+.classpath
+.project
+*.iml
+**/CVS/*
+/CVS/
+dist/*
+out/*
+
